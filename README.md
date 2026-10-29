@@ -1,7 +1,6 @@
-# superstore-executive-sales-dashboard
 # 📊 Superstore Executive Sales Dashboard | Power BI Project
 
-![Superstore Dashboard](<to share/Screenshot 2026-10-29 025914.png>)
+![Executive Overview](Screenshot%202026-10-29%20025914.jpg)
 
 ## 📌 Business Case & Overview
 The goal of this project is to transform raw sales data into an interactive, multi-page business intelligence solution using **Power BI**. It allows stakeholders to monitor key business metrics, explore seasonal sales trends, identify top-performing product categories, and analyze regional and customer performance to support data-driven decision-making.
@@ -19,7 +18,7 @@ The goal of this project is to transform raw sales data into an interactive, mul
 ## 🏗️ Data Model Architecture
 The data model follows a **Star Schema** approach, connecting the central `Fact_Sales` table with key dimension tables for seamless filtering and analysis.
 
-![Superstore Executive Sales Dashboard](<to share/Screenshot 2026-10-29 013153.png>)
+![Data Model Schema](Screenshot%202026-10-29%20013153.png)
 
 ### Key Model Entities:
 - **`Fact_Sales`**: Stores sales transactions, order IDs, sales amounts, order/ship dates, and foreign keys.
