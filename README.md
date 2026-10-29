@@ -19,7 +19,7 @@ The goal of this project is to transform raw sales data into an interactive, mul
 ## 🏗️ Data Model Architecture
 The data model follows a **Star Schema** approach, connecting the central `Fact_Sales` table with key dimension tables for seamless filtering and analysis.
 
-![Data Model Schema](Screenshot%202026-10-29%20013153.png)
+![Superstore Executive Sales Dashboard](<to share/Screenshot 2026-10-29 013153.png>)
 
 ### Key Model Entities:
 - **`Fact_Sales`**: Stores sales transactions, order IDs, sales amounts, order/ship dates, and foreign keys.
