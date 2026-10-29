@@ -1,81 +1,158 @@
-# 📊 Superstore Executive Sales Dashboard | Power BI Project
+# 📊 Superstore Executive Sales Dashboard | Power BI
 
-![Executive Overview](Screenshot%202026-10-29%20025914.jpg)
+An interactive, multi-page Power BI dashboard designed to transform raw sales data into actionable business insights and support data-driven decision-making.
 
-## 📌 Business Case & Overview
-The goal of this project is to transform raw sales data into an interactive, multi-page business intelligence solution using **Power BI**. It allows stakeholders to monitor key business metrics, explore seasonal sales trends, identify top-performing product categories, and analyze regional and customer performance to support data-driven decision-making.
+## 📸 Dashboard Preview
+
+![Superstore Executive Sales Dashboard](<to share/Screenshot 2026-10-29 025914.png>)
 
 ---
 
+## 📌 Business Case & Overview
+
+The goal of this project is to transform raw sales data into an interactive business intelligence solution using **Power BI**.
+
+The dashboard enables stakeholders to monitor key performance indicators (KPIs), explore seasonal sales trends, identify top-performing product categories, and analyze regional and customer performance.
+
 ## 🛠️ Tools & Technologies
-- **Power BI Desktop:** Dashboard design, interactive visual storytelling, and page navigation.
-- **Power Query:** Data cleaning, transformation, and shaping.
-- **DAX (Data Analysis Expressions):** Time intelligence functions, YTD calculations, dynamic KPIs, and growth metrics.
-- **Data Modeling (Star Schema):** Designing clear dimension tables linked to a single central fact table for optimal query performance.
+
+- **Power BI Desktop:** Interactive dashboards, data visualization, and report navigation.
+- **Power Query:** Data cleaning, transformation, and preparation.
+- **DAX:** KPI calculations, year-over-year growth, and time intelligence.
+- **Data Modeling:** Star Schema design for structured and efficient analysis.
 
 ---
 
 ## 🏗️ Data Model Architecture
-The data model follows a **Star Schema** approach, connecting the central `Fact_Sales` table with key dimension tables for seamless filtering and analysis.
 
-![Data Model Schema](Screenshot%202026-10-29%20013153.png)
+The data model follows a **Star Schema** approach, connecting the central `Fact_Sales` table with dimension tables for product, customer, region, shipping, and date analysis.
 
-### Key Model Entities:
-- **`Fact_Sales`**: Stores sales transactions, order IDs, sales amounts, order/ship dates, and foreign keys.
-- **`Dim_Product`**: Contains details on categories, sub-categories, and product names.
-- **`Dim_Customer`**: Tracks customer details and segments (Consumer, Corporate, Home Office).
-- **`Dim_Region`**: Geographical dimensions covering city, state, postal code, and region.
-- **`Dim_Date`**: Dedicated date hierarchy for Time Intelligence calculations.
-- **`Dim_Ship_Mode`**: Shipping methods analysis.
+![Data Model Architecture](<to share/Screenshot 2026-10-29 013153.png>)
+
+### Key Model Entities
+
+- **`Fact_Sales`** — Sales transactions, order IDs, sales amounts, quantities, discounts, and related keys.
+- **`Dim_Product`** — Product categories, sub-categories, and product names.
+- **`Dim_Customer`** — Customer information and segments.
+- **`Dim_Region`** — Geographic attributes, including city, state, postal code, and region.
+- **`Dim_Date`** — Calendar table for time intelligence calculations.
+- **`Dim_Ship_Mode`** — Shipping methods and related analysis.
 
 ---
 
 ## 🚀 Dashboard Pages & Key Features
 
 ### 1. Executive Overview
-Focuses on macro-level performance metrics and overall sales trends.
-- **KPI Cards:** Total Customers, Total Orders, Total Sales, Average Order Value (AOV), and YoY Sales Growth %.
-- **Trend Analysis:** Total Sales vs. Previous Year (PY) Sales by Month.
-- **Product & Segment Breakdown:** Sales distribution across main categories and market segments.
 
-![Executive Overview Page](Screenshot%202026-10-29%20025914.jpg)
+Provides a high-level view of business performance.
+
+- **KPI Cards:** Total Customers, Total Orders, Total Sales, Average Order Value (AOV), and YoY Sales Growth.
+- **Sales Trends:** Monthly sales compared with the previous year.
+- **Category Analysis:** Sales distribution across product categories and customer segments.
+
+![Executive Overview](<to share/Screenshot 2026-10-29 025914.png>)
 
 ---
 
 ### 2. Product & Category Performance
-Explores granular product metrics and shipping performance.
-- **Hierarchy Drill-Down:** Expandable matrix for categories (Technology, Furniture, Office Supplies) and sub-categories.
-- **Product Scatter Plot:** Order count vs. total sales per product name.
-- **Shipping Logistics:** Breakdown of sales by category across shipping modes.
 
-![Product & Category Performance Page](Screenshot%202026-10-29%20030725.png)
+Explores product-level performance and shipping patterns.
+
+- **Hierarchy Drill-Down:** Interactive category and sub-category analysis.
+- **Product Scatter Plot:** Examines the relationship between sales and order volume.
+- **Shipping Analysis:** Sales breakdown by category and shipping mode.
+
+![Product & Category Performance](<to share/Screenshot 2026-10-29 030725.png>)
 
 ---
 
 ### 3. Customer & Regional Analytics
-Analyzes regional geographic footprint and top customer value.
-- **Geographic Visuals:** Map view of sales distribution and state rankings (Top Sales: California, New York, Texas).
-- **Customer Analysis:** Top customers by total sales, order volume, and average order value.
 
-![Customer & Regional Analytics Page](Screenshot%202026-10-29%20025946.jpg)
+Evaluates geographic sales distribution and customer performance.
+
+- **Geographic Analysis:** Sales distribution across states and regions.
+- **Customer Rankings:** Identifies top customers by sales.
+- **Regional Performance:** Highlights key markets, including California and New York, when supported by the data.
+
+![Customer & Regional Analytics](<to share/Screenshot 2026-10-29 025946.png>)
 
 ---
 
 ### 4. Time Intelligence & Growth Analytics
-Monitors performance over time and identifies seasonality.
-- **Time Analytics:** Quarter-over-Quarter and Year-over-Year growth tracking.
-- **Seasonality Insights:** Cumulative sales waterfall chart highlighting fourth-quarter peaks (November & December).
 
-![Time Intelligence & Growth Page](Screenshot%202026-10-29%20030003.png)
+Tracks sales performance over time and identifies seasonal patterns.
+
+- **YoY Growth:** Compares sales performance across years.
+- **Year-to-Date (YTD):** Tracks cumulative sales throughout the year.
+- **Seasonality Analysis:** Examines monthly trends and fourth-quarter performance.
+
+![Time Intelligence & Growth](<to share/Screenshot 2026-10-29 030003.png>)
 
 ---
 
-## 💡 Key DAX Calculations Example
+## 🧮 Key DAX Calculations
+
+### Total Sales
 
 ```dax
-YoY Sales Growth % = 
+Total Sales =
+SUM(Fact_Sales[Sales])
+```
+
+### Previous Year Sales
+
+```dax
+PY Sales =
+CALCULATE(
+    [Total Sales],
+    SAMEPERIODLASTYEAR(Dim_Date[Date])
+)
+```
+
+### Year-over-Year Sales Growth %
+
+```dax
+YoY Sales Growth % =
 DIVIDE(
     [Total Sales] - [PY Sales],
     [PY Sales],
     0
 )
+```
+
+### Year-to-Date Sales
+
+```dax
+YTD Sales =
+TOTALYTD(
+    [Total Sales],
+    Dim_Date[Date]
+)
+```
+
+---
+
+## 💡 Key Business Insights
+
+- **Product Performance:** Evaluate Technology and Furniture categories, along with products such as Phones and Chairs, to identify revenue and profitability opportunities.
+- **Seasonality:** Analyze November and December sales patterns to improve inventory planning and logistics readiness.
+- **Regional Opportunities:** Use state-level performance to support targeted marketing and regional growth strategies.
+
+*Business insights should be validated against the dashboard results and underlying dataset.*
+
+---
+
+## 🎯 Project Objectives
+
+- Transform raw data into meaningful business insights.
+- Build an interactive, multi-page analytical report.
+- Apply dimensional modeling and DAX time intelligence.
+- Support business decisions through clear data visualization.
+
+---
+
+## 👨‍💻 Author
+
+**Ahmed Bedir**  
+Data Analyst | Power BI | SQL | Python
+
