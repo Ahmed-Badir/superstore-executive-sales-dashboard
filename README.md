@@ -1,7 +1,7 @@
 # superstore-executive-sales-dashboard
 # 📊 Superstore Executive Sales Dashboard | Power BI Project
 
-![Executive Overview](to share/Screenshot 2026-10-29 025914.png)
+![Executive Overview](![Superstore Dashboard](<to share/Screenshot 2026-10-29 025914.png>))
 
 ## 📌 Business Case & Overview
 The goal of this project is to transform raw sales data into an interactive, multi-page business intelligence solution using **Power BI**. It allows stakeholders to monitor key business metrics, explore seasonal sales trends, identify top-performing product categories, and analyze regional and customer performance to support data-driven decision-making.
